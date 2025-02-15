@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingHorizontal="20dp"
+    android:paddingVertical="30dp"
+    tools:context=".presentation.AddEntryFragment">
+
+    <TextView
+        android:id="@+id/dateInput"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginTop="20dp"
+        android:gravity="center_vertical"
+        android:text="@string/pick_a_date"
+        android:textAlignment="gravity"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/bgNameInput"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginTop="20dp"
+        android:hint="@string/board_game_name"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/dateInput">
+
+        <com.google.android.material.textfield.MaterialAutoCompleteTextView
+            android:id="@+id/bgName"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:inputType="text"
+            android:paddingHorizontal="16dp"
+            android:textSize="18sp" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/quantityInput"
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:hint="@string/quantity"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/bgNameInput">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/quantity"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:textSize="18sp" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <CheckBox
+        android:id="@+id/checkboxMine"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:text="@string/mine"
+        app:layout_constraintBottom_toBottomOf="@+id/quantityInput"
+        app:layout_constraintLeft_toRightOf="@+id/quantityInput"
+        app:layout_constraintTop_toTopOf="@+id/quantityInput" />
+
+    <CheckBox
+        android:id="@+id/checkboxNew"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:text="@string/new_for_me"
+        app:layout_constraintBottom_toBottomOf="@+id/quantityInput"
+        app:layout_constraintLeft_toRightOf="@+id/checkboxMine"
+        app:layout_constraintTop_toTopOf="@+id/quantityInput" />
+
+
+    <com.google.android.material.button.MaterialButtonToggleGroup
+        android:id="@+id/weightToggleButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        app:singleSelection="true"
+        app:layout_constraintTop_toBottomOf="@+id/quantityInput">
+
+        <Button
+            android:id="@+id/buttonEasy"
+            style="?attr/materialButtonOutlinedStyle"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/easy" />
+
+        <Button
+            android:id="@+id/buttonMiddle"
+            style="?attr/materialButtonOutlinedStyle"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/middle" />
+
+        <Button
+            android:id="@+id/buttonHeavy"
+            style="?attr/materialButtonOutlinedStyle"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/heavy" />
+    </com.google.android.material.button.MaterialButtonToggleGroup>
+
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/saveEntry"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/save"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
