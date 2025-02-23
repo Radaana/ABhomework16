@@ -1,0 +1,24 @@
+<resources>
+    <string name="next">Next</string>
+    <string name="pick_a_date">Выбрать дату</string>
+    <string name="save">Сохранить</string>
+    <string name="quantity">Количество</string>
+    <string name="board_game_name">Название игры</string>
+    <string name="add_entry">Добавить запись</string>
+    <string name="middle">Средняя</string>
+    <string name="easy">Легкая</string>
+    <string name="heavy">Сложная</string>
+    <string name="stats_middle">Средних</string>
+    <string name="stats_easy">Легких</string>
+    <string name="stats_heavy">Сложных</string>
+    <string name="mine">Моя</string>
+    <string name="new_for_me">Новая для меня</string>
+    <string name="list">Список</string>
+    <string name="add">Добавить</string>
+    <string name="stats">Статистика</string>
+    <string name="total">Всего партий</string>
+    <string name="new_games">Новых игр</string>
+    <string name="my_games">С моих полок</string>
+    <string name="unpacked_games">Распаковано игр</string>
+    <string name="unpacked_desc">Новых игр из моей коллекции</string>
+</resources>

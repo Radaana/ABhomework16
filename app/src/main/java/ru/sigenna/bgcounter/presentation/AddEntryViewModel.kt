@@ -4,18 +4,21 @@ import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import kotlinx.coroutines.Job
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import ru.sigenna.bgcounter.api.TeseraApiService
 import ru.sigenna.bgcounter.data.Repository
 import ru.sigenna.bgcounter.model.BgData
 import ru.sigenna.bgcounter.model.BgEntryData
 import ru.sigenna.bgcounter.model.BgWeight
+import java.util.Date
 import javax.inject.Inject
 
 class AddEntryViewModel @Inject constructor(private val repository: Repository) :
     ViewModel() {
     val qty = MutableLiveData<String>()
-    val date = MutableLiveData<Long>()
+    val date = MutableLiveData(Date().time)
     val bg = MutableLiveData<BgData>()
     val bgName = MutableLiveData<String>()
     val bgSuggestions = MutableLiveData<List<BgData>>()
@@ -23,13 +26,18 @@ class AddEntryViewModel @Inject constructor(private val repository: Repository) 
     val isNew = MutableLiveData<Boolean>()
     val weight = MutableLiveData<BgWeight>()
 
+    private var loadSuggestJob: Job? = null
+
     fun loadSuggestions(search: String) {
         if (search.isBlank()) {
             bgSuggestions.value = emptyList()
             return
         }
+        loadSuggestJob?.cancel()
 
-        viewModelScope.launch {
+        loadSuggestJob = viewModelScope.launch {
+            delay(500)
+
             try {
                 TeseraApiService.getBgSuggestions(search, fun(result: List<BgData>) {
                     bgSuggestions.value = result

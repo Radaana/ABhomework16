@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -9,6 +9,246 @@
     android:paddingVertical="30dp"
     tools:context=".presentation.SummaryFragment">
 
+    <TextView
+        android:id="@+id/statTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingBottom="16dp"
+        android:text="@string/stats"
+        android:textSize="24sp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
-</LinearLayout>
+
+    <TextView
+        android:id="@+id/statsTotalLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingBottom="10dp"
+        android:text="@string/total"
+        android:textSize="18sp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/statTitle" />
+
+    <TextView
+        android:id="@+id/statsTotal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:textSize="18sp"
+        app:layout_constraintLeft_toRightOf="@id/statsTotalLabel"
+        app:layout_constraintTop_toBottomOf="@+id/statTitle"
+        tools:text="100" />
+
+    <!--  WEIGHT STATS  -->
+
+    <TextView
+        android:id="@+id/statsEasyLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/stats_easy"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/statsTotalLabel" />
+
+    <TextView
+        android:id="@+id/statsEasy"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        app:layout_constraintLeft_toRightOf="@id/statsEasyLabel"
+        app:layout_constraintTop_toBottomOf="@+id/statsTotalLabel"
+        tools:text="100" />
+
+    <TextView
+        android:id="@+id/statsEasyPercent"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        app:layout_constraintLeft_toRightOf="@id/statsEasy"
+        app:layout_constraintTop_toBottomOf="@+id/statsTotalLabel"
+        tools:text="(10%)" />
+
+    <TextView
+        android:id="@+id/statsMiddleLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/stats_middle"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/statsEasyLabel" />
+
+    <TextView
+        android:id="@+id/statsMiddle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        app:layout_constraintLeft_toRightOf="@id/statsMiddleLabel"
+        app:layout_constraintTop_toBottomOf="@+id/statsEasyLabel"
+        tools:text="100" />
+
+    <TextView
+        android:id="@+id/statsMiddlePercent"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        app:layout_constraintLeft_toRightOf="@id/statsMiddle"
+        app:layout_constraintTop_toBottomOf="@+id/statsEasyLabel"
+        tools:text="(20%)" />
+
+    <TextView
+        android:id="@+id/statsHeavyLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingBottom="20dp"
+        android:text="@string/stats_heavy"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/statsMiddleLabel" />
+
+    <TextView
+        android:id="@+id/statsHeavy"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        app:layout_constraintLeft_toRightOf="@id/statsHeavyLabel"
+        app:layout_constraintTop_toBottomOf="@+id/statsMiddleLabel"
+        tools:text="100" />
+
+    <TextView
+        android:id="@+id/statsHeavyPercent"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        app:layout_constraintLeft_toRightOf="@id/statsHeavy"
+        app:layout_constraintTop_toBottomOf="@+id/statsMiddleLabel"
+        tools:text="(30%)" />
+
+    <LinearLayout
+        android:id="@+id/statsWeightDiagram"
+        android:layout_width="match_parent"
+        android:layout_height="20dp"
+        android:orientation="horizontal"
+        app:layout_constraintTop_toBottomOf="@+id/statsHeavyLabel">
+
+        <View
+            android:id="@+id/statsWeightDiagramEasy"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@color/light_pine" />
+
+        <View
+            android:id="@+id/statsWeightDiagramMiddle"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@color/pine"
+
+            />
+
+        <View
+            android:id="@+id/statsWeightDiagramHeavy"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@color/dark_pine" />
+    </LinearLayout>
+
+    <!--  ICON STATS  -->
+
+    <ImageView
+        android:id="@+id/statsStar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:src="@drawable/star"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/statsWeightDiagram" />
+
+    <TextView
+        android:id="@+id/statsTotalNewLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="20dp"
+        android:paddingBottom="10dp"
+        android:text="@string/new_games"
+        app:layout_constraintLeft_toRightOf="@id/statsStar"
+        app:layout_constraintTop_toBottomOf="@+id/statsWeightDiagram" />
+
+    <TextView
+        android:id="@+id/statsTotalNew"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="20dp"
+        app:layout_constraintLeft_toRightOf="@id/statsTotalNewLabel"
+        app:layout_constraintTop_toBottomOf="@+id/statsWeightDiagram"
+        tools:text="100" />
+
+
+    <ImageView
+        android:id="@+id/statsShelf"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/shelves"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/statsTotalNewLabel" />
+
+
+    <TextView
+        android:id="@+id/statsTotalMineLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:paddingBottom="10dp"
+        android:text="@string/my_games"
+
+        app:layout_constraintLeft_toRightOf="@id/statsShelf"
+        app:layout_constraintTop_toBottomOf="@+id/statsTotalNewLabel" />
+
+    <TextView
+        android:id="@+id/statsTotalMine"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        app:layout_constraintLeft_toRightOf="@id/statsTotalMineLabel"
+        app:layout_constraintTop_toBottomOf="@+id/statsTotalNewLabel"
+        tools:text="100" />
+
+    <ImageView
+        android:id="@+id/statsUnbox"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/unbox"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/statsTotalMineLabel" />
+
+
+    <TextView
+        android:id="@+id/statsTotalUnpackedLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:text="@string/unpacked_games"
+        app:layout_constraintLeft_toRightOf="@id/statsUnbox"
+        app:layout_constraintTop_toBottomOf="@+id/statsTotalMineLabel" />
+
+    <TextView
+        android:id="@+id/statsTotalUnpacked"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        app:layout_constraintLeft_toRightOf="@id/statsTotalUnpackedLabel"
+        app:layout_constraintTop_toBottomOf="@+id/statsTotalMineLabel"
+        tools:text="100" />
+
+    <TextView
+        android:id="@+id/statsTotalUnpackedDesc"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/unpacked_desc"
+        android:textSize="12sp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/statsTotalUnpackedLabel" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
 

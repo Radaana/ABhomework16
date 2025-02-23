@@ -32,10 +32,10 @@ object TeseraApiService {
 
     private val TAG = TeseraApiService::class.simpleName
 
-    private val interceptor = HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY);
+    private val interceptor = HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.HEADERS);
 
     private val client: OkHttpClient = OkHttpClient.Builder()
-//        .addInterceptor(interceptor)
+        .addInterceptor(interceptor)
         .connectTimeout(30, TimeUnit.SECONDS)
         .readTimeout(30, TimeUnit.SECONDS)
         .build()
@@ -48,9 +48,9 @@ object TeseraApiService {
         .build()
         .create(TeseraApi::class.java)
 
-
     @Provides
     fun getBgSuggestions(search: String, callback: (result: List<BgData>) -> Unit): Boolean {
+        Log.d(TAG, "search $search")
         api.getBGSuggestions(search).enqueue(object : Callback<String?> {
             override fun onResponse(call: Call<String?>, response: Response<String?>) {
                 val plain_text_response = response.body()
@@ -59,17 +59,15 @@ object TeseraApiService {
                         .split("\n")
                         .filter { it.contains("игры\tgame") }
                         .map(transform = fun(s: String): BgData {
-                            Log.d(TAG, s)
-                            val splitString =
-                                s.split(Regex("[\\p{javaWhitespace}\u00A0\u2007\u202F]+"), 3)
-                            Log.d(TAG, splitString.toString())
+//                            Log.d(TAG, s)
+                            val splitString = s.split(Regex("\t"), 4)
+//                            Log.d(TAG, splitString.toString())
                             val bgData = BgData(
                                 id = splitString[0].trim(),
                                 teseraStringId = splitString[1].trim(),
                                 title = splitString[2].trim()
-                                    .split(Regex("[\\p{javaWhitespace}\u00A0\u2007\u202F]{2,}"))[0]
                             )
-                            Log.d(TAG, bgData.toString())
+//                            Log.d(TAG, bgData.toString())
                             return bgData
                         })
                     callback(result)

@@ -18,12 +18,10 @@ import com.google.android.material.datepicker.MaterialDatePicker
 import com.google.android.material.textfield.MaterialAutoCompleteTextView
 import com.google.android.material.textfield.TextInputEditText
 import dagger.hilt.android.AndroidEntryPoint
+import ru.sigenna.bgcounter.MainActivity
 import ru.sigenna.bgcounter.R
 import ru.sigenna.bgcounter.model.BgWeight
-import ru.sigenna.bgcounter.utils.Utils
-
-
-import java.util.Date
+import ru.sigenna.bgcounter.utils.Utils.formatDaleFromLong
 import javax.inject.Inject
 
 @AndroidEntryPoint
@@ -69,8 +67,6 @@ class AddEntryFragment : Fragment() {
 
             datePicker.addOnPositiveButtonClickListener {
                 viewModel.date.value = it
-                view.findViewById<TextView>(R.id.dateInput).text =
-                    Utils.dateFormatter.format(Date(it))
             }
 
             datePicker.show(parentFragmentManager, null)
@@ -116,6 +112,10 @@ class AddEntryFragment : Fragment() {
             }
         }
 
+        viewModel.date.observe(viewLifecycleOwner) {
+            view.findViewById<TextView>(R.id.dateInput).text = formatDaleFromLong(it)
+        }
+
         bgNameAutocomplete.onFocusChangeListener = View.OnFocusChangeListener { _, hasFocus ->
             if (hasFocus) {
                 bgNameAutocomplete.showDropDown()
@@ -130,19 +130,21 @@ class AddEntryFragment : Fragment() {
             viewModel.isMine.value = isChecked
         }
 
-        view.findViewById<MaterialButtonToggleGroup>(R.id.weightToggleButton).addOnButtonCheckedListener { toggleButton, checkedId, isChecked ->
-            when (checkedId) {
-                R.id.buttonEasy -> viewModel.weight.value = BgWeight.EASY
-                R.id.buttonMiddle -> viewModel.weight.value = BgWeight.MIDDLE
-                R.id.buttonHeavy -> viewModel.weight.value = BgWeight.HEAVY
+        view.findViewById<MaterialButtonToggleGroup>(R.id.weightToggleButton)
+            .addOnButtonCheckedListener { _, checkedId, _ ->
+                when (checkedId) {
+                    R.id.buttonEasy -> viewModel.weight.value = BgWeight.EASY
+                    R.id.buttonMiddle -> viewModel.weight.value = BgWeight.MIDDLE
+                    R.id.buttonHeavy -> viewModel.weight.value = BgWeight.HEAVY
+                }
             }
-        }
 
         val saveButton = view.findViewById<Button>(R.id.saveEntry)
 
 
         saveButton.setOnClickListener {
             viewModel.saveData()
+            (requireActivity() as MainActivity).toList()
         }
     }
 

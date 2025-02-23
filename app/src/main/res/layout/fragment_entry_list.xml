@@ -8,15 +8,13 @@
     android:paddingVertical="30dp"
     tools:context=".presentation.EntryListFragment">
 
-
-
-    <com.google.android.material.button.MaterialButton
-        android:id="@+id/addEntry"
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/entriesList"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/add_entry"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        tools:listitem="@layout/entry_item"
+        tools:itemCount="5" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
