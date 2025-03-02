@@ -23,4 +23,5 @@
     <string name="unpacked_games">Unpacked games</string>
     <string name="unpacked_desc">My games that were new</string>
     <string name="stats_percent" translatable="false">(%d %%)</string>
+    <string name="edit_date">Edit date</string>
 </resources>

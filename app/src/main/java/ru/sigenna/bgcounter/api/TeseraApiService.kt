@@ -41,7 +41,7 @@ object TeseraApiService {
         .build()
 
 
-    val api: TeseraApi = Retrofit.Builder()
+    private val api: TeseraApi = Retrofit.Builder()
         .baseUrl(BASE_URL)
         .client(client)
         .addConverterFactory(ScalarsConverterFactory.create())
@@ -59,15 +59,12 @@ object TeseraApiService {
                         .split("\n")
                         .filter { it.contains("игры\tgame") }
                         .map(transform = fun(s: String): BgData {
-//                            Log.d(TAG, s)
                             val splitString = s.split(Regex("\t"), 4)
-//                            Log.d(TAG, splitString.toString())
                             val bgData = BgData(
                                 id = splitString[0].trim(),
                                 teseraStringId = splitString[1].trim(),
                                 title = splitString[2].trim()
                             )
-//                            Log.d(TAG, bgData.toString())
                             return bgData
                         })
                     callback(result)

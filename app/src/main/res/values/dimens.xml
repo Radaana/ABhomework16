@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="statsLabelWidth">120dp</dimen>
+    <dimen name="statsCounterWidth">30dp</dimen>
+    <dimen name="statsIconLabelWidth">140dp</dimen>
+
+</resources>

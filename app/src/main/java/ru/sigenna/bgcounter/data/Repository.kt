@@ -1,6 +1,7 @@
 package ru.sigenna.bgcounter.data
 
 import dagger.hilt.android.scopes.ActivityRetainedScoped
+import org.jetbrains.annotations.TestOnly
 import ru.sigenna.bgcounter.model.BgEntryData
 import ru.sigenna.bgcounter.model.BgStatsData
 import ru.sigenna.bgcounter.model.BgWeight
@@ -10,6 +11,11 @@ import kotlin.math.roundToInt
 @ActivityRetainedScoped
 class Repository @Inject constructor() {
     private var list: MutableList<BgEntryData> = MockEntriesData.list.toMutableList()
+
+    @TestOnly
+    fun fillRepository(newList: List<BgEntryData>) {
+        list = newList.toMutableList()
+    }
 
     fun getEntriesList(): List<BgEntryData> {
         return list.toList().sortedByDescending { it.date }
@@ -58,5 +64,14 @@ class Repository @Inject constructor() {
             heavy,
             getPercent(heavy, total),
         )
+    }
+
+    fun getEntryById(id: String):BgEntryData? {
+        return list.find { it.id === id }
+    }
+
+    fun deleteEntry(entry: BgEntryData) {
+        val entityIndex = list.indexOf(entry)
+        list.removeAt(entityIndex)
     }
 }

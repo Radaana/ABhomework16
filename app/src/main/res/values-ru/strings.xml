@@ -21,4 +21,5 @@
     <string name="my_games">С моих полок</string>
     <string name="unpacked_games">Распаковано игр</string>
     <string name="unpacked_desc">Новых игр из моей коллекции</string>
+    <string name="edit_date">Edit date</string>
 </resources>

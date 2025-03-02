@@ -59,7 +59,7 @@ class AddEntryFragment : Fragment() {
                 }
             })
 
-        view.findViewById<TextView>(R.id.dateInput).setOnClickListener {
+        view.findViewById<TextView>(R.id.editDateButton).setOnClickListener {
             val datePicker =
                 MaterialDatePicker.Builder.datePicker()
                     .setTitleText("Select date")
