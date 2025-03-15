@@ -3,6 +3,7 @@ package ru.sigenna.bgcounter.presentation
 import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.recyclerview.widget.RecyclerView
 import ru.sigenna.bgcounter.R
 import ru.sigenna.bgcounter.model.BgEntryData
@@ -11,8 +12,10 @@ import ru.sigenna.bgcounter.utils.Utils.formatDaleFromLong
 
 class EntryItemViewHolder (
     private val view: View,
+    private val listener: Listener,
 ) : RecyclerView.ViewHolder(view) {
 
+    private val root: ConstraintLayout by lazy { view.findViewById(R.id.itemLayout) }
     private val title: TextView by lazy { view.findViewById(R.id.itemTitle) }
     private val date: TextView by lazy { view.findViewById(R.id.itemDate) }
     private val qty: TextView by lazy { view.findViewById(R.id.itemQty) }
@@ -41,10 +44,11 @@ class EntryItemViewHolder (
             starIcon.visibility = View.GONE
         }
         weight.text = when (item.weight) {
-            BgWeight.EASY ->  view.resources.getString(R.string.easy);
-            BgWeight.MIDDLE -> view.resources.getString(R.string.middle);
-            BgWeight.HEAVY -> view.resources.getString(R.string.heavy);
+            BgWeight.EASY ->  view.resources.getString(R.string.easy)
+            BgWeight.MIDDLE -> view.resources.getString(R.string.middle)
+            BgWeight.HEAVY -> view.resources.getString(R.string.heavy)
             null -> ""
         }
+        root.setOnClickListener { listener.onItemClicked(item.id) }
     }
 }

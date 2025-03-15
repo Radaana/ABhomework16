@@ -1,6 +1,5 @@
 package ru.sigenna.bgcounter.data
 
-import org.junit.Assert
 import org.junit.Assert.*
 
 import org.junit.Test
@@ -80,7 +79,7 @@ class RepositoryTest {
     @Test
     fun removeEntry() {
         repository.fillRepository(listOf(entry1, entry2))
-        repository.deleteEntry(entry2)
+        repository.deleteEntry(entry2.id)
         val expected = listOf(entry1)
         val actual = repository.getEntriesList()
 

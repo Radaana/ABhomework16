@@ -1,5 +1,5 @@
 <resources>
-    <string name="next">Next</string>
+    <string name="next">Далее</string>
     <string name="pick_a_date">Выбрать дату</string>
     <string name="save">Сохранить</string>
     <string name="quantity">Количество</string>
@@ -21,5 +21,7 @@
     <string name="my_games">С моих полок</string>
     <string name="unpacked_games">Распаковано игр</string>
     <string name="unpacked_desc">Новых игр из моей коллекции</string>
-    <string name="edit_date">Edit date</string>
+    <string name="edit_date">Изменить дату</string>
+    <string name="delete">Удалить</string>
+    <string name="entry_form_invalid">Форма заполнена некорректно</string>
 </resources>

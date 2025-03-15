@@ -5,16 +5,17 @@ import android.os.Bundle
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentManager
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import dagger.hilt.android.AndroidEntryPoint
-import ru.sigenna.bgcounter.presentation.AddEntryFragment
+import ru.sigenna.bgcounter.presentation.EntryFragment
 import ru.sigenna.bgcounter.presentation.EntryListFragment
 import ru.sigenna.bgcounter.presentation.SummaryFragment
 
 
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
-    private var bottomNav:BottomNavigationView? = null
+    private var bottomNav: BottomNavigationView? = null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -32,9 +33,9 @@ class MainActivity : AppCompatActivity() {
 
         bottomNav = findViewById(R.id.bottom_navigation)
 
-        bottomNav?.setOnItemSelectedListener  { item ->
-            val fragment: Fragment? = when(item.itemId) {
-                R.id.pageAdd -> AddEntryFragment()
+        bottomNav?.setOnItemSelectedListener { item ->
+            val fragment: Fragment? = when (item.itemId) {
+                R.id.pageAdd -> EntryFragment()
                 R.id.pageList -> EntryListFragment()
                 R.id.pageSummary -> SummaryFragment()
 
@@ -53,9 +54,18 @@ class MainActivity : AppCompatActivity() {
     }
 
     fun toList() {
+        supportFragmentManager.popBackStack(null, FragmentManager.POP_BACK_STACK_INCLUSIVE)
         supportFragmentManager.beginTransaction()
-            .replace(R.id.fragmentContainer, EntryListFragment()).commit()
+            .replace(R.id.fragmentContainer, EntryListFragment())
+            .commit()
         bottomNav?.selectedItemId = R.id.pageList
+    }
+
+    fun toEntry() {
+        supportFragmentManager.beginTransaction()
+            .replace(R.id.fragmentContainer, EntryFragment())
+            .addToBackStack(null)
+            .commit()
     }
 
     override fun onDestroy() {

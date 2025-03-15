@@ -24,4 +24,6 @@
     <string name="unpacked_desc">My games that were new</string>
     <string name="stats_percent" translatable="false">(%d %%)</string>
     <string name="edit_date">Edit date</string>
+    <string name="delete">Delete</string>
+    <string name="entry_form_invalid">Form is invalid</string>
 </resources>

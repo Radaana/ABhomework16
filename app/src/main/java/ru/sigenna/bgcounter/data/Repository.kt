@@ -11,6 +11,8 @@ import kotlin.math.roundToInt
 @ActivityRetainedScoped
 class Repository @Inject constructor() {
     private var list: MutableList<BgEntryData> = MockEntriesData.list.toMutableList()
+    private var selectedEntryId: String? = null
+    private var TAG = "Repository"
 
     @TestOnly
     fun fillRepository(newList: List<BgEntryData>) {
@@ -23,6 +25,20 @@ class Repository @Inject constructor() {
 
     fun addEntry(entry: BgEntryData) {
         list.add(entry)
+    }
+
+    fun setSelectedEntry(id: String?) {
+        selectedEntryId = id
+    }
+
+    fun getSelectedEntry(): BgEntryData? {
+        if (selectedEntryId == null) {
+            return  null
+        } else {
+            val entry = getEntryById(selectedEntryId!!)
+            selectedEntryId = null
+            return entry
+        }
     }
 
     private fun getPercent(part: Int, total: Int): Int {
@@ -70,8 +86,15 @@ class Repository @Inject constructor() {
         return list.find { it.id === id }
     }
 
-    fun deleteEntry(entry: BgEntryData) {
-        val entityIndex = list.indexOf(entry)
-        list.removeAt(entityIndex)
+    fun deleteEntry(entryId: String) {
+        val entryIndex = list.indexOfFirst { it.id === entryId }
+        if (entryIndex >= 0) {
+            list.removeAt(entryIndex)
+        }
+    }
+
+    fun editEntry(entry: BgEntryData) {
+        deleteEntry(entry.id)
+        addEntry(entry)
     }
 }

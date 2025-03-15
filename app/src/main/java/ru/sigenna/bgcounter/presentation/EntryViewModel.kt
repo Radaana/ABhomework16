@@ -15,7 +15,7 @@ import ru.sigenna.bgcounter.model.BgWeight
 import java.util.Date
 import javax.inject.Inject
 
-class AddEntryViewModel @Inject constructor(private val repository: Repository) :
+class EntryViewModel @Inject constructor(private val repository: Repository) :
     ViewModel() {
     val qty = MutableLiveData<String>()
     val date = MutableLiveData(Date().time)
@@ -25,8 +25,25 @@ class AddEntryViewModel @Inject constructor(private val repository: Repository) 
     val isMine = MutableLiveData<Boolean>()
     val isNew = MutableLiveData<Boolean>()
     val weight = MutableLiveData<BgWeight>()
+    val isEdit = MutableLiveData<Boolean>()
 
     private var loadSuggestJob: Job? = null
+
+    fun pullEntryData() {
+        val selectedEntry = repository.getSelectedEntry() ?: return
+        qty.value = selectedEntry.qty.toString()
+        date.value = selectedEntry.date
+        bg.value = BgData(
+            id = selectedEntry.id,
+            teseraStringId = selectedEntry.teseraStringId,
+            title = selectedEntry.title
+        )
+        bgName.value = selectedEntry.title
+        isMine.value = selectedEntry.isMine
+        isNew.value = selectedEntry.isNew
+        weight.value = selectedEntry.weight as BgWeight
+        isEdit.value = true
+    }
 
     fun loadSuggestions(search: String) {
         if (search.isBlank()) {
@@ -50,7 +67,7 @@ class AddEntryViewModel @Inject constructor(private val repository: Repository) 
     }
 
     fun saveData() {
-        repository.addEntry(
+        repository.editEntry(
             BgEntryData(
                 title = bg.value?.title ?: "",
                 id = bg.value?.id ?: "",
@@ -64,7 +81,20 @@ class AddEntryViewModel @Inject constructor(private val repository: Repository) 
         )
     }
 
+    fun checkDataValidity(): Boolean {
+        return qty.value != null &&
+                date.value != null &&
+                bg.value != null &&
+                weight.value != null
+    }
+
+    fun deleteEntry() {
+        bg.value?.let {
+            repository.deleteEntry(it.id)
+        }
+    }
+
     companion object {
-        private val TAG = AddEntryViewModel::class.simpleName
+        private val TAG = EntryViewModel::class.simpleName
     }
 }

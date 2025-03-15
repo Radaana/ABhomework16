@@ -8,11 +8,12 @@ import androidx.recyclerview.widget.RecyclerView
 import ru.sigenna.bgcounter.R
 import ru.sigenna.bgcounter.model.BgEntryData
 
-class EntryListAdapter() : ListAdapter<BgEntryData, RecyclerView.ViewHolder>(DiffUtilItem()) {
+class EntryListAdapter(private val listener: Listener) :
+    ListAdapter<BgEntryData, RecyclerView.ViewHolder>(DiffUtilItem()) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.entry_item, parent, false)
-        return EntryItemViewHolder(view)
+        return EntryItemViewHolder(view, listener)
     }
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
@@ -30,6 +31,13 @@ class DiffUtilItem : DiffUtil.ItemCallback<BgEntryData>() {
     }
 
     override fun areContentsTheSame(oldItem: BgEntryData, newItem: BgEntryData): Boolean {
-        return oldItem == newItem
+        return oldItem.title == newItem.title &&
+                oldItem.id == newItem.id &&
+                oldItem.teseraStringId == newItem.teseraStringId &&
+                oldItem.isNew == newItem.isNew &&
+                oldItem.isMine == newItem.isMine &&
+                oldItem.qty == newItem.qty &&
+                oldItem.date == newItem.date &&
+                oldItem.weight == newItem.weight
     }
 }
